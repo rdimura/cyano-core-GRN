@@ -1,9 +1,18 @@
-Files include methods for:
+Python and R scripts for inferring and analyzing gene regulatory networks (GRNs) in model cyanobacteria. This code supports P Bohutskyi, R DiMura, ZD Johnson, R Li, D Anderson, MS Cheung.  " Stress-Related Transcriptional Regulators Dominate the Conserved Core GRN for Three Cyanobacteria: Network Topology Maps the Highest-Influence Nodes as Promising Engineering Targets " (preprint:https://doi.org/10.64898/2026.06.09.731130).
 
-  creating a list of genes targeted by transcription factors (TFs) from both a list of transcription factors and a list of total genes from the organism (GENIE3_TF.R)
-  Using outputs from Genie3, a network (.graphml) is created with a set number of edges using Genie3_Network_Formation.ipynb
-  Once a network is formed, it is visualized and network values associated with stress, edgecount, betweeness centrality, neighborhood connectivity, etc. are assigned
-  Using network values assigned from the Cytoscape software these are mapped onto the previous annotations.
-  An integrated value is created by normalizing all the network metrics by their highest value and adding them together (IV_calcuation.ipynb)
-  COG and KEGG enrichment of locus tags performed through enrichment_core.Rmd
-  
+**Pipeline**
+
+**GENIE3_TF.R**: defines candidate transcription factor (TF) target sets from a curated TF list and the organism's gene set, and runs GENIE3 to infer TF to gene 
+    regulatory weights.
+**GENIE3_Network_Formation.ipynb**: constructs the network (.graphml) from GENIE3 output by retaining the highest-weight edges to a specified edge count.
+**IV_calculation.ipyn**b: computes six centrality measures (degree, k-core, betweenness, closeness, stress, eigenvector) and the Integrated Centrality score (each 
+    measure normalized to its maximum, then summed).
+**Annotating_Network_Tags.ipynb**: maps network and centrality values onto TF annotations.
+**PATRIC_homology.Rmd**: assigns orthology across strains by bidirectional homology.
+**enrichment_core.Rmd**: COG and KEGG functional enrichment of gene sets by locus tag.
+
+**Software**
+Rsubread 2.16.1, GENIE3 1.24.0, NetworkX 3.4.2.
+
+**Data**
+Input expression compendia and outputs are described in the paper and its Supplementary Material.
